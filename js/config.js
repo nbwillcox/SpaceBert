@@ -14,24 +14,28 @@
   C.DY = C.HH + C.D;                                        /* screen distance between two rows of cubes */
 
   const KEY = 'spacebert.settings.v1';
+  const DEFAULT_KEYS = { UL: 'KeyQ', UR: 'KeyE', DL: 'KeyZ', DR: 'KeyC', pause: 'KeyP' };
   const defaults = { master: 0.8, music: 0.6, sfx: 0.9, bloom: true, shake: true, reduced: false };
 
   const S = Object.assign({}, defaults);
+  S.keys = Object.assign({}, DEFAULT_KEYS);
   let hadSaved = false;
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) { Object.assign(S, JSON.parse(raw)); hadSaved = true; }
+    if (raw) { const o = JSON.parse(raw); Object.assign(S, o); S.keys = Object.assign({}, DEFAULT_KEYS, o.keys); hadSaved = true; }
   } catch (e) { /* storage unavailable */ }
   S.save = function () {
     try {
       const o = {};
       for (const k in defaults) o[k] = S[k];
+      o.keys = S.keys;
       localStorage.setItem(KEY, JSON.stringify(o));
     } catch (e) { /* ignore */ }
   };
   if (!hadSaved && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     S.reduced = true;
   }
+  S.DEFAULT_KEYS = DEFAULT_KEYS;
   G.C = C;
   G.settings = S;
 })((window.SGS = window.SGS || {}));

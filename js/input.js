@@ -2,7 +2,23 @@
 (function (G) {
   'use strict';
   const I = { dir: null, _pause: false, _any: false, _launch: false };
-  const MAP = { KeyQ: 'UL', KeyE: 'UR', KeyZ: 'DL', KeyC: 'DR', Numpad7: 'UL', Numpad9: 'UR', Numpad1: 'DL', Numpad3: 'DR', Home: 'UL', PageUp: 'UR', End: 'DL', PageDown: 'DR' };
+  const EXTRA = { Numpad7: 'UL', Numpad9: 'UR', Numpad1: 'DL', Numpad3: 'DR', Home: 'UL', PageUp: 'UR', End: 'DL', PageDown: 'DR' };   /* always on, unless you bind that key to something else */
+  const DIRK = ['UL', 'UR', 'DL', 'DR'];
+  function dirOf(code) {
+    const K = G.settings.keys;
+    for (const d of DIRK) if (K[d] === code) return d;
+    for (const k in K) if (K[k] === code) return null;                  /* bound to pause */
+    return EXTRA[code] || null;
+  }
+  I.capture = null;                                                     /* set by the settings screen: gets the next key code */
+  I.keyName = function (code) {
+    if (!code) return '-';
+    const m = /^(Key|Digit)(.)$/.exec(code);
+    if (m) return m[2];
+    const n = { ArrowUp: '↑', ArrowDown: '↓', ArrowLeft: '←', ArrowRight: '→', Space: 'Space', Escape: 'Esc', Enter: 'Enter', Backspace: 'Bksp', Tab: 'Tab', Comma: ',', Period: '.', Slash: '/', Semicolon: ';', Quote: "'", BracketLeft: '[', BracketRight: ']', Minus: '-', Equal: '=', Backquote: '`', Backslash: '\\' };
+    if (n[code]) return n[code];
+    return code.replace(/^Numpad/, 'Num ').replace(/^(Shift|Control|Alt)(Left|Right)/, '$1 $2');
+  };
   const GAME_KEYS = new Set(['Space', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown']);
 
   I.takePause = () => { const b = I._pause; I._pause = false; return b; };
@@ -14,12 +30,14 @@
   function typing(t) { const n = t && t.tagName; return n === 'INPUT' || n === 'TEXTAREA' || n === 'SELECT'; }
 
   window.addEventListener('keydown', (e) => {
-    if (typing(e.target)) return;
     const c = e.code;
-    if (MAP[c] && !e.repeat) I.dir = MAP[c];
-    else if ((c === 'KeyP' || c === 'Escape') && !e.repeat) I._pause = true;
+    if (I.capture) { e.preventDefault(); e.stopPropagation(); if (!e.repeat) I.capture(c); return; }
+    if (typing(e.target)) return;
+    const d = dirOf(c);
+    if (d && !e.repeat) I.dir = d;
+    else if ((c === G.settings.keys.pause || c === 'Escape') && !e.repeat) I._pause = true;
     if (!e.repeat) I._any = true;
-    if ((MAP[c] || GAME_KEYS.has(c)) && e.target.tagName !== 'BUTTON') e.preventDefault();
+    if ((d || GAME_KEYS.has(c)) && e.target.tagName !== 'BUTTON') e.preventDefault();
   });
   window.addEventListener('blur', () => I.clear());
 

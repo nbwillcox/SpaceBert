@@ -13,8 +13,8 @@
   <title>SpaceBert</title>
   <meta name="description" content="SpaceBert - a free retro-style neon cube-hopper: hop the pyramid to change every cube, dodge the snake and the bouncing balls, and ride the flying discs to safety.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2305071a'/%3E%3Cpath d='M16 5l10 5.5v8L16 24 6 18.5v-8z' fill='%23ff9a3d'/%3E%3Cpath d='M16 5l10 5.5L16 16 6 10.5z' fill='%23ffd69a'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="css/style.css?v=7">
-  <link rel="stylesheet" href="css/mobile.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
+  <link rel="stylesheet" href="css/mobile.css?v=8">
 </head>
 <body>
   <canvas id="game" aria-label="SpaceBert game screen"></canvas>
@@ -50,6 +50,17 @@
         <label class="check"><input id="setBloom" type="checkbox"> Bloom glow</label>
         <label class="check"><input id="setShake" type="checkbox"> Screen shake</label>
         <label class="check"><input id="setReduced" type="checkbox"> Reduced motion (fewer flashes &amp; particles)</label>
+        <div class="keysec">
+          <p class="keyhead">KEY BINDINGS <span id="keyNote">click a key, then press the new one (Esc cancels)</span></p>
+          <div class="keygrid">
+            <label>Hop up-left <button type="button" class="keybtn" data-act="UL"></button></label>
+            <label>Hop up-right <button type="button" class="keybtn" data-act="UR"></button></label>
+            <label>Hop down-left <button type="button" class="keybtn" data-act="DL"></button></label>
+            <label>Hop down-right <button type="button" class="keybtn" data-act="DR"></button></label>
+            <label>Pause <button type="button" class="keybtn" data-act="pause"></button></label>
+          </div>
+          <button type="button" id="btnKeyReset" class="small">RESET KEYS</button>
+        </div>
       </div>
       <div class="menu"><button id="btnSettingsBack" class="primary">BACK</button></div>
     </section>
@@ -80,19 +91,19 @@
 
   <noscript><p style="color:#fff;padding:2rem">SpaceBert needs JavaScript enabled.</p></noscript>
 
-  <script src="js/util.js?v=7"></script>
-  <script src="js/config.js?v=7"></script>
-  <script src="js/audio.js?v=7"></script>
-  <script src="js/gfx.js?v=7"></script>
-  <script src="js/fx.js?v=7"></script>
-  <script src="js/input.js?v=7"></script>
-  <script src="js/scores.js?v=7"></script>
-  <script src="js/art.js?v=7"></script>
-  <script src="js/game.js?v=7"></script>
-  <script src="js/hud.js?v=7"></script>
-  <script src="js/ui.js?v=7"></script>
-  <script src="js/touchcfg.js?v=7"></script>
-  <script src="js/mobile.js?v=7"></script>
-  <script src="js/main.js?v=7"></script>
+  <script src="js/util.js?v=8"></script>
+  <script src="js/config.js?v=8"></script>
+  <script src="js/audio.js?v=8"></script>
+  <script src="js/gfx.js?v=8"></script>
+  <script src="js/fx.js?v=8"></script>
+  <script src="js/input.js?v=8"></script>
+  <script src="js/scores.js?v=8"></script>
+  <script src="js/art.js?v=8"></script>
+  <script src="js/game.js?v=8"></script>
+  <script src="js/hud.js?v=8"></script>
+  <script src="js/ui.js?v=8"></script>
+  <script src="js/touchcfg.js?v=8"></script>
+  <script src="js/mobile.js?v=8"></script>
+  <script src="js/main.js?v=8"></script>
 </body>
 </html>

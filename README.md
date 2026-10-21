@@ -15,6 +15,8 @@ Everything is generated in code: sprites are vector-drawn on the fly, and all so
 | Hop toward a click | Click a spot on the screen: the hero hops toward that corner of himself |
 | Pause | `P` or `Esc` |
 
+All of these can be changed in **Settings > Key bindings** (click a key, press the new one; a key already in use swaps places; *Reset keys* restores the defaults). Bindings are saved in your browser.
+
 ### On a phone or tablet
 
 Play in portrait. Tap the four diagonal buttons to hop up-left, up-right, down-left or down-right (tapping the screen on a side of the hero works too). The pause button opens the menu. The on-screen controls appear on touch devices automatically; Settings has size, opacity and a left-handed layout. Use your browser's *Add to Home Screen* to install it as a full-screen app.

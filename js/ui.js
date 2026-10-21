@@ -89,7 +89,26 @@
       $(id).checked = !!S[checks[id]];
       $(id).addEventListener('change', (e) => { S[checks[id]] = e.target.checked; S.save(); A.sfx.blip(); });
     }
+    /* key rebinding: click a key button, press the new key; a key already in use swaps places */
+    const I = G.input, K = S.keys, btns = Array.from(document.querySelectorAll('.keybtn'));
+    const paint = () => btns.forEach((b) => { b.textContent = I.keyName(K[b.dataset.act]); b.classList.remove('listening'); });
+    const stop = () => { I.capture = null; paint(); };
+    btns.forEach((b) => b.addEventListener('click', () => {
+      A.resume(); A.sfx.blip();
+      stop(); b.textContent = '...'; b.classList.add('listening');
+      I.capture = (code) => {
+        if (code !== 'Escape') {
+          const act = b.dataset.act, old = K[act];
+          for (const k in K) if (K[k] === code && k !== act) K[k] = old;
+          K[act] = code; S.save(); A.sfx.select();
+        }
+        stop();
+      };
+    }));
+    $('btnKeyReset').addEventListener('click', () => { stop(); Object.assign(K, S.DEFAULT_KEYS); S.save(); A.sfx.select(); paint(); });
+    paint();
     window.addEventListener('keydown', (e) => {
+      if (I.capture) return;
       if (e.key !== 'Escape') return;
       if (UI.cur === 'settings') UI.show(UI.back);
       else if (UI.cur === 'scores') G.main.toTitle();
