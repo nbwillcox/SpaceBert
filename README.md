@@ -21,6 +21,10 @@ All of these can be changed in **Settings > Key bindings** (click a key, press t
 
 Play in portrait. Tap the four diagonal buttons to hop up-left, up-right, down-left or down-right (tapping the screen on a side of the hero works too). The pause button opens the menu. The on-screen controls appear on touch devices automatically; Settings has size, opacity and a left-handed layout. Use your browser's *Add to Home Screen* to install it as a full-screen app.
 
+### Controller
+
+Plug in a gamepad and it just works: push the left stick diagonally to hop, or use the face buttons as a diamond (**X** up-left, **Y** up-right, **A** down-left, **B** down-right), **Start** pauses. In menus the D-pad / left stick moves the highlight, **A** selects, **B** goes back and **Start** plays or resumes. **Settings -> Controller** has a dead-zone slider and lets you remap every button.
+
 ## Gameplay
 
 - **Hop every cube** until the whole pyramid has changed colour. The sample cubes in the top-left show the colour sequence for the round. A hop off the edge is a fall (unless a disc is waiting there).
